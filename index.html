@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PinkyEdu 🎀 — Alat Tulis & Jasa Akademik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --pink:#FFB6D5;--pink-soft:#FFE1EF;--pink-light:#FFF0F7;
+  --pink-deep:#FF8FC0;--pink-dark:#E86BA5;
+  --cream:#FFF8F0;--blue:#C8E6F5;--blue-light:#E3F2FB;
+  --text:#4A3C47;--muted:#8A7B85;--white:#FFF;
+  --shadow:0 4px 20px rgba(255,182,213,.25);
+  --shadow-lg:0 8px 32px rgba(255,143,192,.3);
+  --r:18px;--r-sm:12px;
+  --ok:#7ED9A0;--warn:#FFC069;--bad:#FF8B8B;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Quicksand',system-ui,sans-serif;color:var(--text);
+  background:linear-gradient(135deg,#FFF8FB,#FFF0F7 50%,#F5F9FF);
+  min-height:100vh;overflow-x:hidden;font-size:15px;line-height:1.6;
+  padding-bottom:84px;
+}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;outline:none;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:15px;outline:none}
+a{text-decoration:none;color:inherit}
+
+/* ===== TOPBAR ===== */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--pink-soft);
+  padding:10px 16px;display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 2px 12px rgba(255,182,213,.15);
+}
+.logo{
+  font-family:'Poppins',sans-serif;font-weight:700;font-size:20px;
+  background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  display:flex;align-items:center;gap:6px;cursor:pointer;
+}
+.logo .emoji{-webkit-text-fill-color:initial}
+.nav-desktop{display:none;gap:6px}
+.nav-desktop button{
+  padding:8px 14px;border-radius:30px;font-weight:600;font-size:14px;
+  color:var(--muted);transition:all .25s;
+}
+.nav-desktop button:hover{background:var(--pink-light);color:var(--pink-dark)}
+.nav-desktop button.active{background:linear-gradient(135deg,var(--pink),var(--pink-deep));color:#fff;box-shadow:0 4px 12px rgba(255,143,192,.4)}
+.topbar-actions{display:flex;align-items:center;gap:8px}
+.icon-btn{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--pink-light);color:var(--pink-dark);font-size:18px;
+  position:relative;transition:all .25s;
+}
+.icon-btn:hover{background:var(--pink);color:#fff;transform:scale(1.08)}
+.badge{
+  position:absolute;top:-4px;right:-4px;background:linear-gradient(135deg,#FF6BA8,#E84A8A);
+  color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+  padding:0 5px;border:2px solid #fff;
+}
+
+/* ===== LAYOUT ===== */
+.container{max-width:1080px;margin:0 auto;padding:0 16px}
+.page{display:none}
+.page.active{display:block;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:12px 22px;border-radius:30px;font-weight:700;font-size:14px;transition:all .25s}
+.btn-primary{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));color:#fff;
+  box-shadow:0 6px 18px rgba(255,143,192,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(255,143,192,.55)}
+.btn-primary:disabled{background:#E8E0E5;color:#A99DA5;box-shadow:none;cursor:not-allowed;transform:none}
+.btn-outline{background:#fff;color:var(--pink-dark);border:2px solid var(--pink-soft)}
+.btn-outline:hover{background:var(--pink-light);border-color:var(--pink)}
+.btn-danger{background:#FFE8E8;color:#D64545}
+.btn-danger:hover{background:#FFD6D6}
+.btn-wa{background:linear-gradient(135deg,#5BD46B,#25D366);color:#fff;
+  box-shadow:0 6px 18px rgba(37,211,102,.35);width:100%}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(37,211,102,.5)}
+.btn-block{width:100%}
+.back-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;
+  border-radius:30px;background:#fff;color:var(--pink-dark);
+  font-weight:700;font-size:13px;box-shadow:var(--shadow);margin:14px 0;transition:all .25s}
+.back-btn:hover{background:var(--pink-light);transform:translateX(-3px)}
+
+/* ===== HERO ===== */
+.hero{
+  background:linear-gradient(135deg,var(--pink-light),#FFE9F3 40%,var(--blue-light));
+  border-radius:24px;padding:26px 22px;margin:14px 0;position:relative;
+  overflow:hidden;box-shadow:var(--shadow);
+}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,182,213,.55),transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:-50px;left:-40px;width:150px;height:150px;
+  border-radius:50%;background:radial-gradient(circle,rgba(200,230,245,.6),transparent 70%)}
+.hero-inner{position:relative;z-index:2;text-align:center}
+.hero h1{font-family:'Poppins',sans-serif;font-size:24px;font-weight:700;
+  color:var(--pink-dark);margin-bottom:6px;line-height:1.3}
+.hero .quote{font-size:14px;color:var(--muted);font-style:italic;margin-bottom:14px}
+.hero-emoji{font-size:60px;line-height:1;margin:10px 0;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* ===== SECTION ===== */
+.section-title{font-family:'Poppins',sans-serif;font-size:19px;font-weight:700;
+  color:var(--pink-dark);margin:22px 0 12px;display:flex;align-items:center;gap:8px}
+
+/* ===== INFO GRID ===== */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:18px 0}
+.info-card{background:#fff;border-radius:var(--r-sm);padding:14px;
+  box-shadow:var(--shadow);border:1.5px solid var(--pink-soft);transition:all .3s}
+.info-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.info-card .ic{font-size:22px;margin-bottom:4px}
+.info-card p{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ===== PRODUCT GRID ===== */
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
+.product-card{
+  background:#fff;border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--shadow);border:1.5px solid var(--pink-soft);
+  transition:all .3s;display:flex;flex-direction:column;
+}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--pink)}
+.pc-img{width:100%;aspect-ratio:1/1;object-fit:cover;cursor:pointer;
+  background:var(--pink-light);transition:transform .4s}
+.product-card:hover .pc-img{transform:scale(1.05)}
+.pc-body{padding:10px;display:flex;flex-direction:column;gap:5px;flex:1}
+.pc-name{font-weight:700;font-size:13px;line-height:1.3;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px}
+.pc-price{font-weight:700;color:var(--pink-dark);font-size:14px}
+.pc-unit{font-size:11px;color:var(--muted)}
+.pc-stock{font-size:11px;font-weight:700;color:var(--ok)}
+.pc-stock.out{color:var(--bad)}
+.pc-desc{font-size:11px;color:var(--muted);line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-actions{display:flex;gap:5px;margin-top:auto;padding-top:4px}
+.pc-btn{flex:1;padding:8px 4px;border-radius:10px;font-size:11px;font-weight:700;transition:all .2s}
+.pc-btn.detail{background:var(--pink-light);color:var(--pink-dark)}
+.pc-btn.detail:hover{background:var(--pink-soft)}
+.pc-btn.add{background:linear-gradient(135deg,var(--pink-deep),var(--pink-dark));color:#fff}
+.pc-btn.add:hover{transform:scale(1.03)}
+.pc-btn.add:disabled{background:#E8E0E5;color:#A99DA5;cursor:not-allowed;transform:none}
+
+/* ===== DETAIL ===== */
+.detail-wrap{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:18px;margin-bottom:20px}
+.detail-img{width:100%;max-width:320px;margin:0 auto 16px;border-radius:var(--r-sm);
+  aspect-ratio:1/1;object-fit:cover;box-shadow:var(--shadow)}
+.detail-name{font-family:'Poppins',sans-serif;font-size:20px;font-weight:700;color:var(--pink-dark);margin-bottom:6px}
+.detail-price{font-size:22px;font-weight:700;color:var(--pink-dark);margin:8px 0}
+.detail-price small{font-size:13px;color:var(--muted);font-weight:500}
+.detail-desc{color:var(--muted);font-size:14px;line-height:1.7;margin:10px 0}
+.detail-stock{font-size:14px;font-weight:700;margin:6px 0}
+.detail-stock.ok{color:var(--ok)}
+.detail-stock.no{color:var(--bad)}
+.warn-box{background:#FFF6E5;border-left:4px solid var(--warn);
+  padding:10px 12px;border-radius:10px;font-size:13px;color:#8A6D3B;margin:10px 0;line-height:1.5}
+
+/* QTY */
+.qty-row{display:flex;align-items:center;gap:12px;margin:14px 0;padding:12px;
+  background:var(--pink-light);border-radius:var(--r-sm)}
+.qty-btn{width:38px;height:38px;border-radius:50%;background:#fff;color:var(--pink-dark);
+  font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow);transition:all .2s;flex-shrink:0}
+.qty-btn:hover{background:var(--pink-deep);color:#fff;transform:scale(1.08)}
+.qty-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.qty-display{flex:1;text-align:center}
+.qty-val{font-size:18px;font-weight:700;color:var(--pink-dark)}
+.qty-label{font-size:12px;color:var(--muted)}
+.total-price{font-size:20px;font-weight:700;color:var(--pink-dark);text-align:right;padding:8px 0}
+
+/* ===== CART ===== */
+.cart-item{display:flex;gap:10px;background:#fff;border-radius:var(--r-sm);
+  padding:10px;box-shadow:var(--shadow);border:1.5px solid var(--pink-soft);
+  margin-bottom:10px;align-items:center}
+.cart-item img{width:64px;height:64px;border-radius:10px;object-fit:cover;flex-shrink:0;background:var(--pink-light)}
+.cart-info{flex:1;min-width:0}
+.cart-name{font-weight:700;font-size:13px;margin-bottom:2px;line-height:1.3}
+.cart-price{font-size:12px;color:var(--muted)}
+.cart-qty{display:flex;align-items:center;gap:6px;margin-top:6px}
+.cart-qty button{width:26px;height:26px;border-radius:50%;background:var(--pink-light);
+  color:var(--pink-dark);font-weight:700;font-size:14px;
+  display:flex;align-items:center;justify-content:center;transition:all .2s}
+.cart-qty button:hover{background:var(--pink-deep);color:#fff}
+.cart-qty span{font-weight:700;font-size:13px;min-width:70px;text-align:center}
+.cart-sub{font-weight:700;color:var(--pink-dark);font-size:13px;margin-top:4px;text-align:right}
+.cart-remove{color:var(--bad);font-size:18px;padding:4px;border-radius:8px;transition:all .2s;flex-shrink:0}
+.cart-remove:hover{background:#FFE8E8}
+
+.total-box{background:linear-gradient(135deg,var(--pink-light),var(--blue-light));
+  border-radius:var(--r);padding:16px;margin:14px 0;box-shadow:var(--shadow)}
+.total-row{display:flex;justify-content:space-between;align-items:center;
+  font-size:16px;font-weight:700;color:var(--pink-dark)}
+
+/* ===== EMPTY ===== */
+.empty{text-align:center;padding:40px 20px;background:#fff;border-radius:var(--r);
+  box-shadow:var(--shadow);margin:16px 0}
+.empty .e{font-size:52px;margin-bottom:10px;display:block}
+.empty p{color:var(--muted);font-size:14px;margin-bottom:16px}
+
+/* ===== FORMS ===== */
+.form-group{margin-bottom:12px}
+.form-label{display:block;font-weight:600;font-size:13px;margin-bottom:5px}
+.form-label .req{color:var(--bad)}
+.form-input,.form-select,.form-textarea{
+  width:100%;padding:11px 13px;border:1.5px solid var(--pink-soft);
+  border-radius:var(--r-sm);background:#fff;font-size:14px;transition:all .25s;color:var(--text)
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--pink);box-shadow:0 0 0 4px rgba(255,182,213,.2)
+}
+.form-textarea{resize:vertical;min-height:70px}
+.form-hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+/* ===== PAYMENT ===== */
+.pay-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0}
+.pay-opt{display:flex;align-items:center;gap:6px;padding:10px;border-radius:var(--r-sm);
+  background:#fff;border:1.5px solid var(--pink-soft);cursor:pointer;
+  transition:all .2s;font-size:12px;font-weight:600}
+.pay-opt:hover{border-color:var(--pink)}
+.pay-opt.selected{border-color:var(--pink-deep);background:var(--pink-light);
+  box-shadow:0 0 0 3px rgba(255,143,192,.15)}
+.pay-opt .pi{font-size:16px}
+
+/* ===== SUMMARY ===== */
+.summary{background:#fff;border-radius:var(--r);padding:16px;box-shadow:var(--shadow);
+  margin-bottom:12px;border:1.5px solid var(--pink-soft)}
+.summary h3{font-family:'Poppins',sans-serif;font-size:15px;color:var(--pink-dark);
+  margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.srow{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;
+  border-bottom:1px dashed var(--pink-soft);gap:10px}
+.srow:last-child{border-bottom:none}
+.srow .lbl{color:var(--muted);flex-shrink:0}
+.srow .val{font-weight:600;text-align:right;word-break:break-word}
+.srow.total{font-size:15px;font-weight:700;color:var(--pink-dark);padding-top:8px;border-top:1px solid var(--pink-soft);border-bottom:none;margin-top:6px}
+
+/* ===== CHECKBOX ===== */
+.chk{display:flex;gap:10px;align-items:flex-start;padding:12px;
+  background:var(--pink-light);border-radius:var(--r-sm);margin:12px 0;font-size:13px;cursor:pointer;line-height:1.5}
+.chk input{margin-top:2px;width:18px;height:18px;accent-color:var(--pink-deep);cursor:pointer;flex-shrink:0}
+
+/* ===== FILE ===== */
+.file-drop{border:2px dashed var(--pink);border-radius:var(--r-sm);padding:18px;
+  text-align:center;background:var(--pink-light);cursor:pointer;transition:all .25s}
+.file-drop:hover{background:var(--pink-soft);border-color:var(--pink-deep)}
+.file-drop .fi{font-size:28px;margin-bottom:4px;display:block}
+.file-drop p{font-size:12px;color:var(--muted)}
+.file-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#fff;
+  border-radius:10px;margin-top:6px;box-shadow:var(--shadow);font-size:12px}
+.file-item .ficon{font-size:18px;flex-shrink:0}
+.file-item .finfo{flex:1;min-width:0}
+.file-item .fname{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-item .fmeta{font-size:10px;color:var(--muted)}
+.file-item button{color:var(--bad);font-size:16px;padding:4px;flex-shrink:0}
+
+/* ===== PAYMENT DETAIL ===== */
+.pay-detail{background:linear-gradient(135deg,var(--pink-light),var(--blue-light));
+  border-radius:var(--r);padding:16px;margin:12px 0;box-shadow:var(--shadow)}
+.pay-detail h3{font-family:'Poppins',sans-serif;color:var(--pink-dark);margin-bottom:10px;font-size:15px}
+.copy-field{display:flex;justify-content:space-between;align-items:center;
+  background:#fff;border-radius:10px;padding:10px;margin:6px 0;font-size:13px;gap:8px}
+.copy-field .cfval{font-weight:700;color:var(--pink-dark);word-break:break-all;flex:1;text-align:right}
+.copy-btn{padding:6px 12px;border-radius:8px;background:var(--pink-light);
+  color:var(--pink-dark);font-weight:700;font-size:11px;transition:all .2s;flex-shrink:0}
+.copy-btn:hover{background:var(--pink-deep);color:#fff}
+.copy-btn.copied{background:var(--ok);color:#fff}
+.qris-box{width:180px;height:180px;margin:12px auto;border-radius:12px;
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:70px;box-shadow:var(--shadow)}
+
+/* ===== ORDERS ===== */
+.order-card{background:#fff;border-radius:var(--r);padding:14px;box-shadow:var(--shadow);
+  border:1.5px solid var(--pink-soft);margin-bottom:10px}
+.order-head{display:flex;justify-content:space-between;align-items:flex-start;
+  gap:8px;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed var(--pink-soft)}
+.order-id{font-weight:700;color:var(--pink-dark);font-size:13px}
+.order-date{font-size:11px;color:var(--muted);margin-top:2px}
+.order-status{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;
+  background:var(--pink-light);color:var(--pink-dark);white-space:nowrap}
+.order-status.selesai{background:#E3F9EB;color:#2E9E5B}
+.order-body{font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.7}
+.order-body strong{color:var(--text)}
+
+/* ===== PROFILE ===== */
+.profile-card{background:linear-gradient(135deg,var(--pink-light),var(--blue-light));
+  border-radius:var(--r);padding:20px;text-align:center;box-shadow:var(--shadow);margin-bottom:14px}
+.avatar{width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--pink-deep));
+  display:flex;align-items:center;justify-content:center;
+  font-size:32px;color:#fff;margin:0 auto 10px;box-shadow:var(--shadow);font-weight:700}
+.profile-name{font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:var(--pink-dark)}
+.profile-info{font-size:12px;color:var(--muted);margin-top:3px}
+
+/* ===== MODAL ===== */
+.overlay{position:fixed;inset:0;background:rgba(74,60,71,.5);backdrop-filter:blur(4px);
+  z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+.overlay.show{display:flex;animation:fade .2s}
+.modal{background:#fff;border-radius:var(--r);padding:20px;max-width:380px;width:100%;
+  box-shadow:var(--shadow-lg);animation:mIn .3s ease;max-height:88vh;overflow-y:auto}
+@keyframes mIn{from{opacity:0;transform:scale(.9) translateY(20px)}to{opacity:1;transform:none}}
+.modal h3{font-family:'Poppins',sans-serif;color:var(--pink-dark);margin-bottom:10px;font-size:17px}
+.modal p{color:var(--muted);font-size:14px;margin-bottom:14px;line-height:1.6}
+.modal-actions{display:flex;gap:8px;margin-top:14px}
+.modal-actions button{flex:1}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(30px);
+  background:var(--pink-dark);color:#fff;padding:11px 20px;border-radius:30px;
+  font-weight:600;font-size:13px;box-shadow:var(--shadow-lg);z-index:2000;
+  opacity:0;pointer-events:none;transition:all .35s;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== BOTTOM NAV ===== */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.97);
+  backdrop-filter:blur(12px);border-top:1.5px solid var(--pink-soft);
+  display:flex;justify-content:space-around;padding:6px 4px 8px;z-index:100;
+  box-shadow:0 -4px 20px rgba(255,182,213,.2)}
+.bottom-nav button{display:flex;flex-direction:column;align-items:center;gap:1px;
+  padding:4px;border-radius:12px;color:var(--muted);font-size:10px;font-weight:700;
+  transition:all .25s;position:relative;flex:1}
+.bottom-nav button .bn{font-size:19px;transition:transform .25s}
+.bottom-nav button.active{color:var(--pink-dark)}
+.bottom-nav button.active .bn{transform:scale(1.15) translateY(-2px)}
+.bottom-nav .badge{top:0;right:14px}
+
+/* ===== FOOTER ===== */
+.footer{background:linear-gradient(135deg,var(--pink-light),var(--blue-light));
+  border-radius:24px 24px 0 0;padding:24px 20px 100px;margin-top:24px;text-align:center}
+.f-logo{font-family:'Poppins',sans-serif;font-weight:700;font-size:18px;
+  color:var(--pink-dark);margin-bottom:4px}
+.f-tag{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5}
+.f-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.f-links button{font-size:12px;font-weight:600;color:var(--muted);transition:color .2s}
+.f-links button:hover{color:var(--pink-dark)}
+.f-social{display:flex;justify-content:center;gap:10px;margin:12px 0}
+.f-social a{width:40px;height:40px;border-radius:50%;background:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+  box-shadow:var(--shadow);transition:all .25s}
+.f-social a:hover{transform:translateY(-3px) scale(1.08);box-shadow:var(--shadow-lg)}
+.f-quote{font-size:12px;font-style:italic;color:var(--muted);margin-top:10px}
+
+/* ===== ADMIN PANEL ===== */
+.admin-panel{background:var(--blue-light);border:1.5px solid var(--blue);
+  border-radius:var(--r);padding:14px;margin-bottom:14px}
+.admin-panel h3{font-family:'Poppins',sans-serif;color:#4A7A9E;margin-bottom:10px;font-size:15px}
+.admin-prod{display:flex;gap:8px;background:#fff;border-radius:10px;padding:10px;
+  margin-bottom:8px;align-items:center;box-shadow:var(--shadow)}
+.admin-prod img{width:44px;height:44px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--pink-light)}
+.admin-prod .ap-info{flex:1;min-width:0;font-size:12px}
+.admin-prod .ap-name{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.admin-prod .ap-meta{color:var(--muted);font-size:11px}
+.admin-btns{display:flex;flex-direction:column;gap:3px;flex-shrink:0}
+.admin-btns button{font-size:10px;padding:4px 8px;border-radius:6px;font-weight:700}
+.ab-edit{background:var(--pink-light);color:var(--pink-dark)}
+.ab-add{background:#DDF7E5;color:#2E9E5B}
+.ab-red{background:#FFF0D6;color:#B57B00}
+.ab-del{background:#FFE8E8;color:#D64545}
+.admin-toggle{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;
+  background:var(--blue-light);color:#4A7A9E;transition:all .2s}
+.admin-toggle.active{background:var(--pink-deep);color:#fff}
+
+/* ===== RESPONSIVE ===== */
+@media(min-width:640px){
+  body{padding-bottom:20px}
+  .bottom-nav{display:none}
+  .nav-desktop{display:flex}
+  .product-grid{grid-template-columns:repeat(3,1fr);gap:14px}
+  .pc-name{font-size:14px}
+  .hero h1{font-size:30px}
+  .hero-emoji{font-size:80px}
+  .container{padding:0 20px}
+  .pay-grid{grid-template-columns:repeat(3,1fr)}
+  .footer{padding-bottom:30px}
+}
+@media(min-width:900px){
+  .product-grid{grid-template-columns:repeat(4,1fr)}
+  .hero{padding:36px 30px}
+}
+@media(max-width:340px){
+  .product-grid{gap:8px}
+  .pc-body{padding:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOPBAR ===== -->
+<header class="topbar">
+  <div class="logo" onclick="go('home')"><span class="emoji">🎀</span> PinkyEdu</div>
+  <nav class="nav-desktop">
+    <button data-nav="home" onclick="go('home')">Beranda</button>
+    <button data-nav="shop" onclick="go('shop')">Jualan</button>
+    <button data-nav="cart" onclick="go('cart')">Keranjang</button>
+    <button data-nav="orders" onclick="go('orders')">Pesanan</button>
+    <button data-nav="profile" onclick="go('profile')">Profil</button>
+  </nav>
+  <div class="topbar-actions">
+    <button class="icon-btn" onclick="go('cart')" title="Keranjang">🛒
+      <span class="badge" id="badgeTop" style="display:none">0</span>
+    </button>
+    <button class="admin-toggle" id="adminToggle" onclick="toggleAdmin()">🔧</button>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+  <!-- HOME -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <div class="hero-inner">
+        <h1>Selamat Datang di PinkyEdu 💗</h1>
+        <p class="quote">"Sedikit demi sedikit, tugas selesai satu per satu."</p>
+        <div class="hero-emoji">📚</div>
+        <button class="btn btn-primary" onclick="go('shop')">🛍️ Lihat Jualan</button>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card"><div class="ic">💸</div><p>Harga menyesuaikan jumlah pembelian.</p></div>
+      <div class="info-card"><div class="ic">📎</div><p>Beberapa layanan butuh file pendukung.</p></div>
+      <div class="info-card"><div class="ic">⏰</div><p>Pesanan layanan akademik sesuai waktu yang dibutuhkan.</p></div>
+      <div class="info-card"><div class="ic">💬</div><p>Pesanan dikonfirmasi via WhatsApp Admin.</p></div>
+    </div>
+
+    <h2 class="section-title">✨ Produk Populer</h2>
+    <div class="product-grid" id="homeGrid"></div>
+
+    <div class="footer">
+      <div class="f-logo">🎀 PinkyEdu</div>
+      <p class="f-tag">Belajar, mengerjakan tugas, dan menyelesaikan kebutuhan akademik jadi lebih mudah.</p>
+      <div class="f-links">
+        <button onclick="go('shop')">Jualan</button>
+        <button onclick="go('orders')">Pesanan</button>
+        <button onclick="go('profile')">Profil</button>
+        <button onclick="waGeneral()">Bantuan</button>
+      </div>
+      <div class="f-social">
+        <a href="https://wa.me/6285604740012" target="_blank" title="WhatsApp">💬</a>
+        <a href="https://www.instagram.com/pinkyedu.id?stkn=c2I4NjZnamhsemM3&utm_source=qr" target="_blank" title="Instagram">📷</a>
+        <a href="https://www.tiktok.com/@pinkyedu.id" target="_blank" title="TikTok">🎵</a>
+      </div>
+      <p class="f-quote">"Pelan-pelan tidak apa-apa, yang penting tetap berjalan. 💗"</p>
+    </div>
+  </section>
+
+  <!-- SHOP -->
+  <section class="page" id="page-shop">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <h2 class="section-title" style="margin-top:14px">🛍️ Jualan</h2>
+      <button class="admin-toggle" id="adminToggleShop" onclick="toggleAdmin()" style="display:none">🔧 Mode Admin</button>
+    </div>
+    <div id="adminPanel" style="display:none"></div>
+    <div class="product-grid" id="shopGrid"></div>
+  </section>
+
+  <!-- DETAIL -->
+  <section class="page" id="page-detail">
+    <button class="back-btn" onclick="back()">← Kembali</button>
+    <div class="detail-wrap" id="detailBody"></div>
+  </section>
+
+  <!-- CART -->
+  <section class="page" id="page-cart">
+    <button class="back-btn" onclick="back()">← Kembali</button>
+    <h2 class="section-title">🛒 Keranjang</h2>
+    <div id="cartBody"></div>
+  </section>
+
+  <!-- CHECKOUT -->
+  <section class="page" id="page-checkout">
+    <button class="back-btn" onclick="back()">← Kembali</button>
+    <h2 class="section-title">📝 Checkout</h2>
+    <div id="checkoutBody"></div>
+  </section>
+
+  <!-- CONFIRM -->
+  <section class="page" id="page-confirm">
+    <button class="back-btn" onclick="back()">← Kembali</button>
+    <h2 class="section-title">✅ Konfirmasi Pesanan</h2>
+    <div id="confirmBody"></div>
+  </section>
+
+  <!-- ORDERS -->
+  <section class="page" id="page-orders">
+    <h2 class="section-title" style="margin-top:14px">📦 Pesanan</h2>
+    <div id="ordersBody"></div>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="page" id="page-profile">
+    <button class="back-btn" onclick="back()">← Kembali</button>
+    <h2 class="section-title">👤 Profil</h2>
+    <div id="profileBody"></div>
+  </section>
+
+</main>
+
+<!-- ===== BOTTOM NAV ===== -->
+<nav class="bottom-nav">
+  <button data-nav="home" onclick="go('home')"><span class="bn">🏠</span>Beranda</button>
+  <button data-nav="shop" onclick="go('shop')"><span class="bn">🛍️</span>Jualan</button>
+  <button data-nav="cart" onclick="go('cart')"><span class="bn">🛒</span>Keranjang
+    <span class="badge" id="badgeBottom" style="display:none">0</span>
+  </button>
+  <button data-nav="orders" onclick="go('orders')"><span class="bn">📦</span>Pesanan</button>
+  <button data-nav="profile" onclick="go('profile')"><span class="bn">👤</span>Profil</button>
+</nav>
+
+<!-- ===== MODAL ===== -->
+<div class="overlay" id="overlay"><div class="modal" id="modalBody"></div></div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   PINKYEDU — REWRITE BERSIH
+   ============================================================ */
+
+/* ---------- KONSTANTA ---------- */
+const WA_NUMBER  = '6285604740012';           // format internasional tanpa +
+const WA_DISPLAY = '085604740012';            // tampilan
+const IG_URL = 'https://www.instagram.com/pinkyedu.id?stkn=c2I4NjZnamhsemM3&utm_source=qr';
+const TT_URL = 'https://www.tiktok.com/@pinkyedu.id';
+const ADMIN_PASS = 'pinkyadmin';              // password admin
+
+/* ---------- GAMBAR PRODUK (SVG inline, pasti tampil) ---------- */
+function svgData(svg){ return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg); }
+
+const IMG_MARGIN_FISIKA = svgData(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FFE1EF"/><rect x="45" y="28" width="110" height="144" rx="8" fill="#fff" stroke="#FFB6D5" stroke-width="3"/><circle cx="60" cy="50" r="4" fill="#FF8FC0"/><circle cx="60" cy="80" r="4" fill="#FF8FC0"/><circle cx="60" cy="110" r="4" fill="#FF8FC0"/><circle cx="60" cy="140" r="4" fill="#FF8FC0"/><line x1="72" y1="50" x2="140" y2="50" stroke="#FFD1E3" stroke-width="2"/><line x1="72" y1="80" x2="140" y2="80" stroke="#FFD1E3" stroke-width="2"/><line x1="72" y1="110" x2="140" y2="110" stroke="#FFD1E3" stroke-width="2"/><line x1="72" y1="140" x2="140" y2="140" stroke="#FFD1E3" stroke-width="2"/><text x="100" y="190" text-anchor="middle" font-size="13" fill="#E86BA5" font-family="sans-serif" font-weight="bold">FISIKA</text></svg>`);
+
+const IMG_MARGIN_BIO = svgData(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#E3F2FB"/><rect x="52" y="48" width="96" height="96" rx="10" fill="#fff" stroke="#7FC8E8" stroke-width="3"/><circle cx="100" cy="96" r="28" fill="none" stroke="#7FC8E8" stroke-width="3"/><circle cx="100" cy="96" r="10" fill="#C8E6F5"/><line x1="100" y1="68" x2="100" y2="124" stroke="#7FC8E8" stroke-width="2"/><line x1="72" y1="96" x2="128" y2="96" stroke="#7FC8E8" stroke-width="2"/><text x="100" y="185" text-anchor="middle" font-size="13" fill="#4A7A9E" font-family="sans-serif" font-weight="bold">BIOLOGI</text></svg>`);
+
+const IMG_TURNITIN = svgData(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FFF0F7"/><rect x="48" y="32" width="104" height="136" rx="8" fill="#fff" stroke="#FF8FC0" stroke-width="3"/><circle cx="100" cy="80" r="22" fill="none" stroke="#FF8FC0" stroke-width="3"/><path d="M90 80 l6 6 l14 -16" stroke="#FF8FC0" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="62" y1="122" x2="138" y2="122" stroke="#FFD1E3" stroke-width="2"/><line x1="62" y1="138" x2="118" y2="138" stroke="#FFD1E3" stroke-width="2"/><text x="100" y="188" text-anchor="middle" font-size="13" fill="#E86BA5" font-family="sans-serif" font-weight="bold">TURNITIN</text></svg>`);
+
+const IMG_DAFTAR_PUSTAKA = svgData(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FFF8F0"/><rect x="38" y="60" width="28" height="88" rx="3" fill="#FFB6D5"/><rect x="70" y="48" width="28" height="100" rx="3" fill="#C8E6F5"/><rect x="102" y="68" width="28" height="80" rx="3" fill="#FFD1E3"/><rect x="134" y="52" width="28" height="96" rx="3" fill="#B5E8C8"/><text x="100" y="185" text-anchor="middle" font-size="12" fill="#E86BA5" font-family="sans-serif" font-weight="bold">DAFTAR PUSTAKA</text></svg>`);
+
+const IMG_MAKALAH = svgData(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FFE1EF"/><rect x="42" y="26" width="116" height="148" rx="8" fill="#fff" stroke="#FF8FC0" stroke-width="3"/><text x="100" y="62" text-anchor="middle" font-size="16" fill="#E86BA5" font-family="sans-serif" font-weight="bold">BAB 1-5</text><line x1="58" y1="82" x2="142" y2="82" stroke="#FFD1E3" stroke-width="2"/><line x1="58" y1="98" x2="142" y2="98" stroke="#FFD1E3" stroke-width="2"/><line x1="58" y1="114" x2="128" y2="114" stroke="#FFD1E3" stroke-width="2"/><line x1="58" y1="130" x2="142" y2="130" stroke="#FFD1E3" stroke-width="2"/><line x1="58" y1="146" x2="108" y2="146" stroke="#FFD1E3" stroke-width="2"/><text x="100" y="190" text-anchor="middle" font-size="12" fill="#E86BA5" font-family="sans-serif" font-weight="bold">MAKALAH</text></svg>`);
+
+const IMG_DEFAULT = svgData(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#FFE1EF"/><text x="100" y="115" text-anchor="middle" font-size="60">📦</text></svg>`);
+
+/* ---------- PRODUK DEFAULT ---------- */
+const DEFAULT_PRODUCTS = [
+  {
+    id:'margin-fisika',
+    name:'Kertas Margin Fisika',
+    price:3000,
+    unit:'lembar',
+    step:10,
+    unitLabel:'10 lembar',
+    desc:'Kertas margin fisika yang dapat digunakan untuk kebutuhan pembelajaran dan tugas fisika. Harga dihitung berdasarkan jumlah lembar yang dipilih.',
+    img:IMG_MARGIN_FISIKA,
+    stock:50,
+    needsFile:false
+  },
+  {
+    id:'margin-biologi',
+    name:'Alat Margin Biologi',
+    price:15000,
+    unit:'alat',
+    step:1,
+    unitLabel:'1 alat',
+    desc:'Alat margin biologi untuk membantu kebutuhan pembelajaran dan kegiatan praktikum atau tugas biologi.',
+    img:IMG_MARGIN_BIO,
+    stock:30,
+    needsFile:false
+  },
+  {
+    id:'cek-turnitin',
+    name:'Cek Turnitin',
+    price:5000,
+    unit:'dokumen',
+    step:1,
+    unitLabel:'1 dokumen',
+    desc:'Layanan pengecekan tingkat kemiripan dokumen serta pendampingan untuk memahami hasil pemeriksaan dan memperbaiki bagian tulisan yang perlu diperhatikan. Layanan ini tidak digunakan untuk menyiasati atau menghindari sistem pemeriksaan, tetapi untuk membantu pengguna memahami hasil dan memperbaiki tulisan secara akademik.',
+    img:IMG_TURNITIN,
+    stock:99,
+    needsFile:true,
+    fileHint:'Upload dokumen yang ingin dicek (PDF/DOC/DOCX).'
+  },
+  {
+    id:'daftar-pustaka',
+    name:'Jasa Daftar Pustaka',
+    price:7000,
+    unit:'daftar pustaka',
+    step:10,
+    unitLabel:'10 daftar pustaka',
+    desc:'Layanan penyusunan dan pengecekan daftar pustaka berdasarkan sumber yang diberikan oleh pengguna. Pemesanan jasa daftar pustaka maksimal dilakukan H-1.',
+    img:IMG_DAFTAR_PUSTAKA,
+    stock:99,
+    needsFile:true,
+    fileHint:'Upload sumber/referensi yang ingin disusun daftar pustakanya.',
+    warning:'Pemesanan jasa daftar pustaka maksimal dilakukan H-1. Silakan pilih waktu pemesanan yang sesuai.'
+  },
+  {
+    id:'makalah-bab-1-5',
+    name:'Pembuatan Makalah Bab 1–5',
+    price:0,
+    unit:'konsultasi',
+    step:1,
+    unitLabel:'konsultasi',
+    desc:'Layanan pendampingan penyusunan makalah Bab 1–5 berdasarkan materi, data, sumber, dan kebutuhan yang diberikan oleh pengguna. Layanan diarahkan sebagai pendampingan akademik, penyuntingan, dan pengembangan berdasarkan bahan yang diberikan pengguna.',
+    img:IMG_MAKALAH,
+    stock:99,
+    needsFile:true,
+    fileHint:'Upload materi/data pendukung makalah.',
+    isMakalah:true,
+    warning:'Untuk layanan ini, silakan isi data dengan lengkap dan konsultasikan kebutuhan makalah kamu dengan Admin.'
+  }
+];
+
+/* ---------- STATE ---------- */
+let PRODUCTS = [];
+let CART = [];
+let ORDERS = [];
+let USER = null;
+let IS_ADMIN = false;
+let currentProduct = null;
+let detailQty = 1;
+let formData = {};
+let uploadedFiles = [];
+let selectedPayment = '';
+let currentOrderId = '';
+let currentOrderTotal = 0;
+let historyStack = [];
+
+/* ---------- STORAGE ---------- */
+function loadAll(){
+  try{ PRODUCTS = JSON.parse(localStorage.getItem('pedu_products')||'null') || clone(DEFAULT_PRODUCTS); }catch(e){ PRODUCTS = clone(DEFAULT_PRODUCTS); }
+  try{ CART = JSON.parse(localStorage.getItem('pedu_cart')||'[]'); }catch(e){ CART = []; }
+  try{ ORDERS = JSON.parse(localStorage.getItem('pedu_orders')||'[]'); }catch(e){ ORDERS = []; }
+  try{ USER = JSON.parse(localStorage.getItem('pedu_user')||'null'); }catch(e){ USER = null; }
+  if(!Array.isArray(PRODUCTS) || PRODUCTS.length===0) PRODUCTS = clone(DEFAULT_PRODUCTS);
+}
+function saveProducts(){ localStorage.setItem('pedu_products', JSON.stringify(PRODUCTS)); }
+function saveCart(){ localStorage.setItem('pedu_cart', JSON.stringify(CART)); }
+function saveOrders(){ localStorage.setItem('pedu_orders', JSON.stringify(ORDERS)); }
+function saveUser(){ localStorage.setItem('pedu_user', JSON.stringify(USER)); }
+function clone(o){ return JSON.parse(JSON.stringify(o)); }
+
+/* ---------- FORMAT ---------- */
+function rupiah(n){
+  n = Number(n);
+  if(!isFinite(n) || isNaN(n)) n = 0;
+  return 'Rp' + Math.round(n).toLocaleString('id-ID');
+}
+function fmtSize(b){
+  b = Number(b)||0;
+  if(b < 1024) return b + ' B';
+  if(b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+  return (b/1024/1024).toFixed(1) + ' MB';
+}
+function fmtDate(str){
+  if(!str) return '-';
+  try{
+    const d = new Date(str);
+    if(isNaN(d.getTime())) return '-';
+    return d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  }catch(e){ return '-'; }
+}
+function esc(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+/* ---------- NAVIGASI ---------- */
+function go(page, push=true){
+  const cur = document.querySelector('.page.active');
+  const curId = cur ? cur.id.replace('page-','') : 'home';
+  if(push && curId !== page) historyStack.push(curId);
+
+  // render halaman yang butuh data dinamis
+  if(page === 'checkout') renderCheckout();
+  if(page === 'confirm')  renderConfirm();
+  if(page === 'cart')     renderCart();
+  if(page === 'orders')   renderOrders();
+  if(page === 'profile')  renderProfile();
+  if(page === 'shop')     renderShop();
+  if(page === 'home')     renderHome();
+
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const t = document.getElementById('page-'+page);
+  if(t) t.classList.add('active');
+
+  document.querySelectorAll('[data-nav]').forEach(b=>{
+    b.classList.toggle('active', b.dataset.nav === page);
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function back(){
+  const prev = historyStack.pop() || 'home';
+  go(prev, false);
+}
+
+/* ---------- RENDER: HOME ---------- */
+function renderHome(){
+  const el = document.getElementById('homeGrid');
+  if(!el) return;
+  el.innerHTML = PRODUCTS.slice(0,4).map((p,i)=>productCard(p,i)).join('');
+}
+
+/* ---------- RENDER: SHOP ---------- */
+function renderShop(){
+  const el = document.getElementById('shopGrid');
+  if(!el) return;
+  el.innerHTML = PRODUCTS.map((p,i)=>productCard(p,i)).join('');
+  updateAdminUI();
+}
+
+/* ---------- CARD PRODUK ---------- */
+function productCard(p, i){
+  const out = (Number(p.stock)||0) <= 0;
+  const priceTxt = (Number(p.price)||0) > 0 ? rupiah(p.price) : 'Konsultasi';
+  const unitTxt = p.step > 1 ? ('per ' + p.step + ' ' + (p.unit||'')) : ('per ' + (p.unit||''));
+  return `
+  <div class="product-card" style="animation:fade .35s ${i*0.04}s both">
+    <img class="pc-img" src="${p.img||IMG_DEFAULT}" alt="${esc(p.name)}" onclick="openDetail('${p.id}')">
+    <div class="pc-body">
+      <div class="pc-name">${esc(p.name)}</div>
+      <div class="pc-price">${priceTxt}</div>
+      <div class="pc-unit">${esc(unitTxt)}</div>
+      <div class="pc-stock ${out?'out':''}">
+        ${out ? '❌ Stok habis' : '✅ Stok: ' + (Number(p.stock)||0)}
+      </div>
+      <div class="pc-desc">${esc(p.desc||'')}</div>
+      <div class="pc-actions">
+        <button class="pc-btn detail" onclick="openDetail('${p.id}')">Detail</button>
+        <button class="pc-btn add" onclick="quickAdd('${p.id}')" ${out?'disabled':''}>+ Keranjang</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------- DETAIL ---------- */
+function openDetail(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p){ toast('Produk tidak ditemukan'); return; }
+  currentProduct = p;
+  detailQty = Math.max(1, Number(p.step)||1);
+  renderDetail();
+  go('detail');
+}
+
+function renderDetail(){
+  const p = currentProduct;
+  const el = document.getElementById('detailBody');
+  if(!p || !el) return;
+
+  const out = (Number(p.stock)||0) <= 0;
+  const priceTxt = (Number(p.price)||0) > 0 ? rupiah(p.price) : 'Konsultasi';
+  const unitTxt = p.step > 1 ? ('per ' + p.step + ' ' + (p.unit||'')) : ('per ' + (p.unit||''));
+  const total = hitungTotal(p, detailQty);
+
+  let html = `
+    <img class="detail-img" src="${p.img||IMG_DEFAULT}" alt="${esc(p.name)}">
+    <div class="detail-name">${esc(p.name)}</div>
+    <div class="detail-price">${priceTxt} <small>/ ${esc(unitTxt)}</small></div>
+    <div class="detail-stock ${out?'no':'ok'}">
+      ${out ? '❌ Stok habis' : '✅ Stok tersedia: ' + (Number(p.stock)||0)}
+    </div>
+    <p class="detail-desc">${esc(p.desc||'')}</p>
+  `;
+
+  if(p.warning) html += `<div class="warn-box">⚠️ ${esc(p.warning)}</div>`;
+  if(p.needsFile) html += `<div class="warn-box">📎 ${esc(p.fileHint||'Layanan ini membutuhkan file pendukung.')}</div>`;
+
+  if(!out){
+    html += `
+      <div class="qty-row">
+        <button class="qty-btn" onclick="changeQty(-1)" ${detailQty<=p.step?'disabled':''}>−</button>
+        <div class="qty-display">
+          <div class="qty-val" id="qtyVal">${detailQty} ${esc(p.unit||'')}</div>
+          <div class="qty-label" id="qtyLabel">${p.step>1 ? 'kelipatan '+p.step : 'satuan'}</div>
+        </div>
+        <button class="qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+      <div class="total-price" id="detailTotal">Total: ${rupiah(total)}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+        <button class="btn btn-outline" style="flex:1;min-width:140px" onclick="addFromDetail()">🛒 + Keranjang</button>
+        <button class="btn btn-primary" style="flex:1;min-width:140px" onclick="buyNow()">⚡ Beli Sekarang</button>
+      </div>
+      ${p.isMakalah ? `<button class="btn btn-wa" style="margin-top:10px" onclick="waMakalah()">💬 Konsultasi ke WhatsApp Admin</button>` : ''}
+    `;
+  } else {
+    html += `<button class="btn btn-primary" disabled style="width:100%">Stok Habis</button>`;
+  }
+
+  el.innerHTML = html;
+}
+
+function changeQty(delta){
+  const p = currentProduct;
+  if(!p) return;
+  const step = Math.max(1, Number(p.step)||1);
+  const stock = Number(p.stock)||0;
+  let q = detailQty + delta*step;
+  if(q < step) q = step;
+  if(q > stock){ q = Math.floor(stock/step)*step; if(q<step) q = step; toast('Jumlah melebihi stok'); }
+  detailQty = q;
+  renderDetail();
+}
+
+function hitungTotal(p, qty){
+  const price = Number(p.price)||0;
+  const step = Math.max(1, Number(p.step)||1);
+  const q = Number(qty)||0;
+  if(price === 0) return 0;
+  return price * (q / step);
+}
+
+/* ---------- CART ---------- */
+function quickAdd(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  addToCart(p, Number(p.step)||1);
+}
+
+function addFromDetail(){
+  const p = currentProduct;
+  if(!p) return;
+  addToCart(p, detailQty);
+}
+
+function addToCart(p, qty){
+  if((Number(p.stock)||0) <= 0){ toast('Stok habis'); return; }
+  const step = Math.max(1, Number(p.step)||1);
+  qty = Math.max(step, Number(qty)||step);
+  const exist = CART.find(c=>c.id===p.id);
+  if(exist){
+    const nq = exist.qty + qty;
+    if(nq > (Number(p.stock)||0)){ toast('Jumlah melebihi stok'); return; }
+    exist.qty = nq;
+  } else {
+    if(qty > (Number(p.stock)||0)){ toast('Jumlah melebihi stok'); return; }
+    CART.push({ id:p.id, qty:qty });
+  }
+  saveCart(); updateBadge(); renderCart();
+  toast('💗 Ditambahkan ke keranjang');
+}
+
+function buyNow(){
+  const p = currentProduct;
+  if(!p) return;
+  CART = [{ id:p.id, qty: detailQty }];
+  saveCart(); updateBadge(); renderCart();
+  go('checkout');
+}
+
+function updateBadge(){
+  const n = CART.reduce((s,c)=>s + (Number(c.qty)||0), 0);
+  ['badgeTop','badgeBottom'].forEach(id=>{
+    const b = document.getElementById(id);
+    if(!b) return;
+    b.textContent = n;
+    b.style.display = n>0 ? 'flex' : 'none';
+  });
+}
+
+function renderCart(){
+  const el = document.getElementById('cartBody');
+  if(!el) return;
+  if(CART.length === 0){
+    el.innerHTML = `
+      <div class="empty">
+        <span class="e">🛒</span>
+        <p>Keranjang kamu masih kosong 💗</p>
+        <button class="btn btn-primary" onclick="go('shop')">Mulai Belanja</button>
+      </div>`;
+    return;
+  }
+
+  let html = '';
+  let total = 0;
+  CART.forEach((c, idx)=>{
+    const p = PRODUCTS.find(x=>x.id===c.id);
+    if(!p) return;
+    const sub = hitungTotal(p, c.qty);
+    total += sub;
+    html += `
+      <div class="cart-item">
+        <img src="${p.img||IMG_DEFAULT}" alt="${esc(p.name)}" onclick="openDetail('${p.id}')">
+        <div class="cart-info">
+          <div class="cart-name">${esc(p.name)}</div>
+          <div class="cart-price">${rupiah(p.price)} / ${esc(p.unitLabel||p.unit||'')}</div>
+          <div class="cart-qty">
+            <button onclick="cartQty(${idx},-1)">−</button>
+            <span>${c.qty} ${esc(p.unit||'')}</span>
+            <button onclick="cartQty(${idx},1)">+</button>
+          </div>
+          <div class="cart-sub">Subtotal: ${rupiah(sub)}</div>
+        </div>
+        <button class="cart-remove" onclick="removeCart(${idx})">🗑️</button>
+      </div>`;
+  });
+
+  html += `
+    <div class="total-box">
+      <div class="total-row"><span>Total Belanja</span><span>${rupiah(total)}</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <button class="btn btn-primary btn-block" onclick="go('checkout')">Lanjut ke Checkout →</button>
+      <button class="btn btn-outline btn-block" onclick="go('shop')">+ Tambah Produk Lain</button>
+      <button class="btn btn-danger btn-block" onclick="cancelOrder()">Batalkan Pesanan</button>
+    </div>`;
+
+  el.innerHTML = html;
+}
+
+function cartQty(idx, delta){
+  const c = CART[idx];
+  if(!c) return;
+  const p = PRODUCTS.find(x=>x.id===c.id);
+  if(!p) return;
+  const step = Math.max(1, Number(p.step)||1);
+  const stock = Number(p.stock)||0;
+  let q = c.qty + delta*step;
+  if(q < step) q = step;
+  if(q > stock){ toast('Melebihi stok'); return; }
+  c.qty = q;
+  saveCart(); updateBadge(); renderCart();
+}
+
+function removeCart(idx){
+  confirmBox('Hapus produk ini dari keranjang?', ()=>{
+    CART.splice(idx,1);
+    saveCart(); updateBadge(); renderCart();
+    toast('Produk dihapus');
+  });
+}
+
+function cancelOrder(){
+  confirmBox('Apakah kamu yakin ingin membatalkan pesanan ini?', ()=>{
+    CART = [];
+    saveCart(); updateBadge(); renderCart();
+    toast('Pesanan dibatalkan');
+  }, 'Ya, Batalkan Pesanan', 'Tidak, Kembali');
+}
+
+/* ---------- CHECKOUT ---------- */
+function cartInfo(){
+  let total = 0;
+  const items = [];
+  CART.forEach(c=>{
+    const p = PRODUCTS.find(x=>x.id===c.id);
+    if(!p) return;
+    const sub = hitungTotal(p, c.qty);
+    total += sub;
+    items.push({ p, qty:c.qty, sub });
+  });
+  return { items, total };
+}
+
+function renderCheckout(){
+  const el = document.getElementById('checkoutBody');
+  if(!el) return;
+  if(CART.length === 0){
+    el.innerHTML = `<div class="empty"><span class="e">🛒</span><p>Keranjang kosong. Pilih produk dulu ya.</p><button class="btn btn-primary" onclick="go('shop')">Mulai Belanja</button></div>`;
+    return;
+  }
+
+  const { items, total } = cartInfo();
+  const needsFile = items.some(it=>it.p.needsFile);
+  const isMakalah = items.some(it=>it.p.isMakalah);
+
+  let prodHtml = items.map(it=>`
+    <div class="cart-item" style="align-items:center">
+      <img src="${it.p.img||IMG_DEFAULT}" alt="">
+      <div class="cart-info">
+        <div class="cart-name">${esc(it.p.name)}</div>
+        <div class="cart-price">${it.qty} ${esc(it.p.unit||'')} × ${rupiah(it.p.price)}</div>
+        <div class="cart-sub">${rupiah(it.sub)}</div>
+      </div>
+    </div>`).join('');
+
+  el.innerHTML = `
+    <div class="summary">
+      <h3>🛍️ Produk Dipesan</h3>
+      ${prodHtml}
+    </div>
+
+    <div class="summary">
+      <h3>👤 Data Pemesan</h3>
+      <div class="form-group">
+        <label class="form-label">Nama <span class="req">*</span></label>
+        <input class="form-input" id="fName" placeholder="Nama lengkap" value="${esc(formData.name || (USER && USER.name) || '')}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email <span class="req">*</span></label>
+        <input class="form-input" id="fEmail" type="email" placeholder="email@example.com" value="${esc(formData.email || (USER && USER.email) || '')}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nomor WhatsApp <span class="req">*</span></label>
+        <input class="form-input" id="fWa" type="tel" placeholder="08xxxxxxxxxx" value="${esc(formData.wa || (USER && USER.wa) || '')}">
+      </div>
+    </div>
+
+    <div class="summary">
+      <h3>📋 Detail Pesanan</h3>
+      <div class="form-group">
+        <label class="form-label">Waktu Pemesanan</label>
+        <input class="form-input" id="fTime" type="datetime-local" value="${esc(formData.time||'')}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Deadline (jika diperlukan)</label>
+        <input class="form-input" id="fDeadline" type="datetime-local" value="${esc(formData.deadline||'')}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Catatan Tambahan</label>
+        <textarea class="form-textarea" id="fNote" placeholder="Contoh: tolong dikerjakan rapi, dll.">${esc(formData.note||'')}</textarea>
+      </div>
+    </div>
+
+    ${isMakalah ? `
+    <div class="summary">
+      <h3>📝 Detail Layanan Makalah</h3>
+      <div class="form-group">
+        <label class="form-label">Judul/Topik <span class="req">*</span></label>
+        <input class="form-input" id="fJudul" placeholder="Judul atau topik makalah" value="${esc(formData.judul||'')}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mata Kuliah</label>
+        <input class="form-input" id="fMatkul" placeholder="Nama mata kuliah" value="${esc(formData.matkul||'')}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Bab yang Dibutuhkan</label>
+        <input class="form-input" id="fBab" placeholder="Contoh: Bab 1-5" value="${esc(formData.bab||'')}">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Kebutuhan Layanan</label>
+        <textarea class="form-textarea" id="fKebutuhan" placeholder="Jelaskan kebutuhan makalah kamu...">${esc(formData.kebutuhan||'')}</textarea>
+      </div>
+    </div>` : ''}
+
+    ${items.some(it=>it.p.id==='daftar-pustaka') ? `
+      <div class="warn-box">⚠️ Pemesanan jasa daftar pustaka maksimal dilakukan H-1. Silakan pilih waktu pemesanan yang sesuai.</div>
+    ` : ''}
+
+    ${needsFile ? `
+    <div class="summary">
+      <h3>📎 Upload File Pendukung</h3>
+      <div class="file-drop" onclick="document.getElementById('fileInput').click()">
+        <span class="fi">📁</span>
+        <p>Klik untuk memilih file<br><small>PDF, DOC, DOCX, JPG, PNG</small></p>
+      </div>
+      <input type="file" id="fileInput" style="display:none" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" onchange="onFilePick(event)">
+      <div id="fileList"></div>
+      <div class="form-hint">Setelah WhatsApp terbuka, silakan kirim file melalui lampiran WhatsApp agar Admin menerimanya.</div>
+    </div>` : ''}
+
+    <div class="summary">
+      <h3>💳 Metode Pembayaran <span class="req">*</span></h3>
+      <div class="pay-grid" id="payGrid">${renderPayOptions()}</div>
+    </div>
+
+    <div class="total-box">
+      <div class="total-row"><span>Total</span><span>${rupiah(total)}</span></div>
+    </div>
+
+    <button class="btn btn-primary btn-block" onclick="proceedConfirm()">Lanjut Konfirmasi →</button>
+  `;
+
+  // default waktu
+  const t = document.getElementById('fTime');
+  if(t && !t.value){
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+    t.value = now.toISOString().slice(0,16);
+  }
+  renderFileList();
+}
+
+function renderPayOptions(){
+  const list = [
+    {id:'bank', ic:'🏦', label:'Bank Transfer'},
+    {id:'va', ic:'🔢', label:'Virtual Account'},
+    {id:'qris', ic:'📱', label:'QRIS'},
+    {id:'gopay', ic:'💚', label:'GoPay'},
+    {id:'ovo', ic:'💜', label:'OVO'},
+    {id:'dana', ic:'💙', label:'DANA'},
+    {id:'shopeepay', ic:'🧡', label:'ShopeePay'},
+    {id:'linkaja', ic:'❤️', label:'LinkAja'},
+    {id:'mobile', ic:'📲', label:'Mobile Banking'},
+    {id:'other', ic:'💳', label:'Lainnya'}
+  ];
+  return list.map(m=>`
+    <div class="pay-opt ${selectedPayment===m.id?'selected':''}" data-pay="${m.id}" onclick="pickPay('${m.id}')">
+      <span class="pi">${m.ic}</span><span>${m.label}</span>
+    </div>`).join('');
+}
+
+function pickPay(id){
+  selectedPayment = id;
+  document.querySelectorAll('.pay-opt').forEach(el=>{
+    el.classList.toggle('selected', el.dataset.pay === id);
+  });
+  showPayDetail(id);
+}
+
+function showPayDetail(id){
+  const old = document.querySelector('.pay-detail');
+  if(old) old.remove();
+  const { total } = cartInfo();
+  const tstr = rupiah(total);
+  const payLabels = {bank:'Bank Transfer',va:'Virtual Account',qris:'QRIS',gopay:'GoPay',ovo:'OVO',dana:'DANA',shopeepay:'ShopeePay',linkaja:'LinkAja',mobile:'Mobile Banking',other:'Metode Lainnya'};
+  let html = '';
+
+  if(id==='bank'){
+    html = payBox('🏦 Bank Transfer', `
+      ${copyRow('Bank','BCA')}
+      ${copyRow('No. Rekening','1234567890','1234567890')}
+      ${copyRow('Atas Nama','PinkyEdu')}
+      ${copyRow('Total',tstr)}
+      <p class="form-hint">Transfer sesuai total, lalu konfirmasi via WhatsApp.</p>
+      <button class="btn btn-wa" style="margin-top:10px" onclick="waPayment()">💬 Konfirmasi Pembayaran via WhatsApp</button>
+    `);
+  } else if(id==='va'){
+    html = payBox('🔢 Virtual Account', `
+      ${copyRow('Bank','BCA')}
+      ${copyRow('No. VA','88081234567890','88081234567890')}
+      ${copyRow('Total',tstr)}
+      ${copyRow('Batas Waktu','24 jam')}
+      <p class="form-hint">Bayar melalui m-Banking/ATM sesuai nomor VA.</p>
+      <button class="btn btn-wa" style="margin-top:10px" onclick="waPayment()">💬 Konfirmasi Pembayaran via WhatsApp</button>
+    `);
+  } else if(id==='qris'){
+    html = payBox('📱 QRIS', `
+      <div class="qris-box">📱</div>
+      ${copyRow('Penerima','PinkyEdu')}
+      ${copyRow('Total',tstr)}
+      <p class="form-hint">Scan QRIS dengan aplikasi e-wallet/m-banking.</p>
+      <button class="btn btn-primary btn-block" style="margin-top:8px" onclick="markPaid()">✅ Saya Sudah Membayar</button>
+    `);
+  } else if(['gopay','ovo','dana','shopeepay','linkaja'].includes(id)){
+    const names = {gopay:'GoPay',ovo:'OVO',dana:'DANA',shopeepay:'ShopeePay',linkaja:'LinkAja'};
+    html = payBox(names[id], `
+      ${copyRow('No. HP',WA_DISPLAY,WA_DISPLAY)}
+      ${copyRow('Atas Nama','PinkyEdu')}
+      ${copyRow('Total',tstr)}
+      <p class="form-hint">Transfer ke nomor ${names[id]} di atas.</p>
+      <button class="btn btn-wa" style="margin-top:10px" onclick="waPayment()">💬 Konfirmasi Pembayaran via WhatsApp</button>
+    `);
+  } else if(id==='mobile'){
+    html = payBox('📲 Mobile Banking', `
+      ${copyRow('Bank','BCA')}
+      ${copyRow('No. Rekening','1234567890','1234567890')}
+      ${copyRow('Total',tstr)}
+      <p class="form-hint">Transfer melalui aplikasi mobile banking.</p>
+      <button class="btn btn-wa" style="margin-top:10px" onclick="waPayment()">💬 Konfirmasi Pembayaran via WhatsApp</button>
+    `);
+  } else if(id==='other'){
+    html = payBox('💳 Metode Lainnya', `
+      ${copyRow('WhatsApp Admin',WA_DISPLAY,WA_DISPLAY)}
+      ${copyRow('Total',tstr)}
+      <p class="form-hint">Hubungi Admin untuk metode pembayaran lainnya.</p>
+      <button class="btn btn-wa" style="margin-top:10px" onclick="waPayment()">💬 Konfirmasi Pembayaran via WhatsApp</button>
+    `);
+  }
+  if(html){
+    const grid = document.getElementById('payGrid');
+    if(grid) grid.insertAdjacentHTML('afterend', html);
+  }
+}
+
+function payBox(title, inner){
+  return `<div class="pay-detail"><h3>${title}</h3>${inner}</div>`;
+}
+function copyRow(label, value, copyVal){
+  const cv = copyVal || value;
+  return `<div class="copy-field"><span>${esc(label)}</span><span class="cfval">${esc(value)}</span>
+    <button class="copy-btn" onclick="copyTxt('${esc(cv)}', this)">Salin</button></div>`;
+}
+
+function markPaid(){
+  toast('✅ Pembayaran ditandai sudah dibayar');
+  const box = document.querySelector('.pay-detail');
+  if(box){
+    const b = box.querySelector('.btn-primary');
+    if(b) b.remove();
+    if(!box.querySelector('.btn-wa')){
+      box.insertAdjacentHTML('beforeend', `<button class="btn btn-wa" style="margin-top:10px" onclick="waPayment()">💬 Konfirmasi Pembayaran via WhatsApp</button>`);
+    }
+  }
+}
+
+/* ---------- FILE UPLOAD ---------- */
+function onFilePick(e){
+  const files = Array.from(e.target.files||[]);
+  files.forEach(f=>{
+    if(uploadedFiles.find(x=>x.name===f.name && x.size===f.size)) return;
+    uploadedFiles.push({ name:f.name, size:f.size, type:(f.type || (f.name.split('.').pop()||'').toUpperCase()) });
+  });
+  renderFileList();
+  e.target.value = '';
+}
+function renderFileList(){
+  const el = document.getElementById('fileList');
+  if(!el) return;
+  if(uploadedFiles.length===0){ el.innerHTML = ''; return; }
+  el.innerHTML = uploadedFiles.map((f,i)=>`
+    <div class="file-item">
+      <span class="ficon">📄</span>
+      <div class="finfo">
+        <div class="fname">${esc(f.name)}</div>
+        <div class="fmeta">${esc(f.type)} • ${fmtSize(f.size)}</div>
+      </div>
+      <button onclick="removeFile(${i})">✕</button>
+    </div>`).join('');
+}
+function removeFile(i){ uploadedFiles.splice(i,1); renderFileList(); }
+
+/* ---------- PROCEED TO CONFIRM ---------- */
+function proceedConfirm(){
+  const name  = (document.getElementById('fName')?.value||'').trim();
+  const email = (document.getElementById('fEmail')?.value||'').trim();
+  const wa    = (document.getElementById('fWa')?.value||'').trim();
+  if(!name)  return toast('Nama wajib diisi');
+  if(!email) return toast('Email wajib diisi');
+  if(!wa)    return toast('Nomor WhatsApp wajib diisi');
+  if(!selectedPayment) return toast('Pilih metode pembayaran dulu');
+
+  formData = {
+    name, email, wa,
+    time: document.getElementById('fTime')?.value || '',
+    deadline: document.getElementById('fDeadline')?.value || '',
+    note: document.getElementById('fNote')?.value || '',
+    judul: document.getElementById('fJudul')?.value || '',
+    matkul: document.getElementById('fMatkul')?.value || '',
+    bab: document.getElementById('fBab')?.value || '',
+    kebutuhan: document.getElementById('fKebutuhan')?.value || '',
+    payment: selectedPayment
+  };
+  // simpan user lokal
+  USER = { name, email, wa, isAdmin: !!(USER && USER.isAdmin) };
+  saveUser();
+
+  currentOrderId = genOrderId();
+  currentOrderTotal = cartInfo().total;
+
+  renderConfirm();
+  go('confirm');
+}
+
+function genOrderId(){
+  const d = new Date();
+  const ymd = d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
+  const n = (ORDERS.filter(o => (o.id||'').includes(ymd)).length) + 1;
+  return 'PEDU-' + ymd + '-' + String(n).padStart(3,'0');
+}
+
+/* ---------- CONFIRM ---------- */
+function renderConfirm(){
+  const el = document.getElementById('confirmBody');
+  if(!el) return;
+  if(CART.length===0){
+    el.innerHTML = `<div class="empty"><span class="e">🛒</span><p>Keranjang kosong.</p><button class="btn btn-primary" onclick="go('shop')">Mulai Belanja</button></div>`;
+    return;
+  }
+
+  const { items, total } = cartInfo();
+  const payLabels = {bank:'Bank Transfer',va:'Virtual Account',qris:'QRIS',gopay:'GoPay',ovo:'OVO',dana:'DANA',shopeepay:'ShopeePay',linkaja:'LinkAja',mobile:'Mobile Banking',other:'Metode Lainnya'};
+  const payLabel = payLabels[formData.payment] || '-';
+  const isMakalah = items.some(it=>it.p.isMakalah);
+
+  let prodRows = items.map(it=>`
+    <div class="srow">
+      <span class="lbl">${esc(it.p.name)} × ${it.qty} ${esc(it.p.unit||'')}</span>
+      <span class="val">${rupiah(it.sub)}</span>
+    </div>`).join('');
+
+  el.innerHTML = `
+    <div class="summary">
+      <h3>🧾 Data Pemesan</h3>
+      <div class="srow"><span class="lbl">Nama</span><span class="val">${esc(formData.name)}</span></div>
+      <div class="srow"><span class="lbl">Email</span><span class="val">${esc(formData.email)}</span></div>
+      <div class="srow"><span class="lbl">WhatsApp</span><span class="val">${esc(formData.wa)}</span></div>
+      <div class="srow"><span class="lbl">Nomor Pesanan</span><span class="val">${esc(currentOrderId)}</span></div>
+    </div>
+
+    <div class="summary">
+      <h3>🛍️ Detail Pesanan</h3>
+      ${prodRows}
+      <div class="srow total"><span class="lbl">Total</span><span class="val">${rupiah(total)}</span></div>
+    </div>
+
+    ${isMakalah ? `
+    <div class="summary">
+      <h3>📝 Detail Layanan</h3>
+      <div class="srow"><span class="lbl">Judul/Topik</span><span class="val">${esc(formData.judul||'-')}</span></div>
+      <div class="srow"><span class="lbl">Mata Kuliah</span><span class="val">${esc(formData.matkul||'-')}</span></div>
+      <div class="srow"><span class="lbl">Bab</span><span class="val">${esc(formData.bab||'-')}</span></div>
+      <div class="srow"><span class="lbl">Kebutuhan</span><span class="val">${esc(formData.kebutuhan||'-')}</span></div>
+    </div>` : ''}
+
+    <div class="summary">
+      <h3>⏰ Waktu</h3>
+      <div class="srow"><span class="lbl">Waktu Pemesanan</span><span class="val">${formData.time ? fmtDate(formData.time) : '-'}</span></div>
+      <div class="srow"><span class="lbl">Deadline</span><span class="val">${formData.deadline ? fmtDate(formData.deadline) : '-'}</span></div>
+      <div class="srow"><span class="lbl">Catatan</span><span class="val">${esc(formData.note||'-')}</span></div>
+    </div>
+
+    ${uploadedFiles.length>0 ? `
+    <div class="summary">
+      <h3>📎 File</h3>
+      ${uploadedFiles.map(f=>`<div class="srow"><span class="lbl">${esc(f.name)}</span><span class="val">${esc(f.type)} • ${fmtSize(f.size)}</span></div>`).join('')}
+    </div>` : ''}
+
+    <div class="summary">
+      <h3>💳 Pembayaran</h3>
+      <div class="srow"><span class="lbl">Metode</span><span class="val">${esc(payLabel)}</span></div>
+    </div>
+
+    <label class="chk">
+      <input type="checkbox" id="confirmCheck">
+      <span>Saya sudah memeriksa kembali seluruh informasi pesanan dan memastikan data yang saya masukkan sudah benar.</span>
+    </label>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+      <button class="btn btn-outline btn-block" onclick="go('checkout')">← Kembali dan Edit</button>
+      <button class="btn btn-wa" onclick="sendToWa()">💬 Pesan melalui WhatsApp Admin</button>
+    </div>
+  `;
+}
+
+/* ---------- WHATSAPP ---------- */
+function sendToWa(){
+  const chk = document.getElementById('confirmCheck');
+  if(!chk || !chk.checked) return toast('Centang konfirmasi terlebih dahulu');
+
+  const { items, total } = cartInfo();
+  const payLabels = {bank:'Bank Transfer',va:'Virtual Account',qris:'QRIS',gopay:'GoPay',ovo:'OVO',dana:'DANA',shopeepay:'ShopeePay',linkaja:'LinkAja',mobile:'Mobile Banking',other:'Metode Lainnya'};
+  const payLabel = payLabels[formData.payment] || '-';
+
+  let m = '';
+  m += 'Halo Kak PinkyEdu 👋🏻🎀\n\n';
+  m += 'Saya ingin melakukan pemesanan.\n\n';
+  m += 'Nomor Pesanan: ' + currentOrderId + '\n';
+  m += 'Nama: ' + (formData.name||'-') + '\n';
+  m += 'Email: ' + (formData.email||'-') + '\n';
+  m += 'WhatsApp: ' + (formData.wa||'-') + '\n\n';
+  m += 'Detail Pesanan:\n';
+  items.forEach((it,i)=>{
+    m += (i+1) + '. ' + it.p.name + '\n';
+    m += '   Jumlah: ' + it.qty + ' ' + (it.p.unit||'') + '\n';
+    m += '   Harga: ' + rupiah(it.p.price) + '\n';
+    m += '   Subtotal: ' + rupiah(it.sub) + '\n';
+  });
+  m += '\nTotal: ' + rupiah(total) + '\n';
+  m += 'Metode Pembayaran: ' + payLabel + '\n';
+  m += 'Waktu Pemesanan: ' + (formData.time ? fmtDate(formData.time) : '-') + '\n';
+  if(formData.deadline) m += 'Deadline: ' + fmtDate(formData.deadline) + '\n';
+  if(formData.note) m += 'Catatan: ' + formData.note + '\n';
+  if(formData.judul) m += 'Judul/Topik: ' + formData.judul + '\n';
+  if(formData.matkul) m += 'Mata Kuliah: ' + formData.matkul + '\n';
+  if(formData.bab) m += 'Bab: ' + formData.bab + '\n';
+  if(formData.kebutuhan) m += 'Kebutuhan: ' + formData.kebutuhan + '\n';
+  if(uploadedFiles.length>0){
+    m += '\nFile:\n';
+    uploadedFiles.forEach(f=>{ m += '- ' + f.name + ' (' + f.type + ', ' + fmtSize(f.size) + ')\n'; });
+    m += '\nFile akan saya kirimkan melalui lampiran WhatsApp.\n';
+  }
+  m += '\nSaya sudah memeriksa kembali data pesanan saya.\n\nTerima kasih, Kak ♡';
+
+  // simpan order lokal
+  ORDERS.unshift({
+    id: currentOrderId,
+    date: new Date().toISOString(),
+    items: items.map(it=>({ name:it.p.name, qty:it.qty, unit:it.p.unit, price:it.p.price, sub:it.sub })),
+    total,
+    payment: payLabel,
+    status: 'Menunggu Pembayaran',
+    buyer: formData.name,
+    wa: formData.wa
+  });
+  saveOrders();
+
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(m), '_blank');
+  toast('💬 WhatsApp Admin dibuka!');
+}
+
+function waPayment(){
+  const { total } = cartInfo();
+  const payLabels = {bank:'Bank Transfer',va:'Virtual Account',qris:'QRIS',gopay:'GoPay',ovo:'OVO',dana:'DANA',shopeepay:'ShopeePay',linkaja:'LinkAja',mobile:'Mobile Banking',other:'Metode Lainnya'};
+  const payLabel = payLabels[formData.payment || selectedPayment] || '-';
+  let m = '';
+  m += 'Halo Kak PinkyEdu 👋🏻🎀\n\n';
+  m += 'Saya ingin mengonfirmasi pembayaran pesanan saya.\n\n';
+  m += 'Nomor Pesanan: ' + (currentOrderId || '-') + '\n';
+  m += 'Nama: ' + (formData.name || (USER&&USER.name) || '-') + '\n';
+  m += 'Total: ' + rupiah(total) + '\n';
+  m += 'Metode Pembayaran: ' + payLabel + '\n\n';
+  m += 'Saya akan mengirimkan bukti pembayaran melalui WhatsApp.\n\n';
+  m += 'Terima kasih, Kak ♡';
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(m), '_blank');
+  toast('Silakan lampirkan bukti pembayaran di WhatsApp');
+}
+
+function waGeneral(){
+  const m = 'Halo Kak PinkyEdu 👋🏻🎀\n\nSaya ingin bertanya mengenai layanan yang tersedia. Bisa dibantu informasinya, Kak? Terima kasih ♡';
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(m), '_blank');
+}
+
+function waMakalah(){
+  const m = 'Halo Kak PinkyEdu 👋🏻🎀\n\nSaya ingin berkonsultasi mengenai layanan Pembuatan Makalah Bab 1–5. Bisa dibantu, Kak? Terima kasih ♡';
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(m), '_blank');
+}
+
+function waOrder(orderId, name){
+  const m = 'Halo Kak PinkyEdu 👋🏻🎀\n\nSaya ingin menanyakan pesanan saya.\n\nNomor Pesanan: ' + orderId + '\nNama: ' + name + '\n\nMohon bantuannya, Kak. Terima kasih ♡';
+  window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(m), '_blank');
+}
+
+/* ---------- ORDERS ---------- */
+function renderOrders(){
+  const el = document.getElementById('ordersBody');
+  if(!el) return;
+  if(ORDERS.length===0){
+    el.innerHTML = `<div class="empty"><span class="e">📦</span><p>Belum ada pesanan.</p><button class="btn btn-primary" onclick="go('shop')">Mulai Belanja</button></div>`;
+    return;
+  }
+  el.innerHTML = ORDERS.map(o=>`
+    <div class="order-card">
+      <div class="order-head">
+        <div>
+          <div class="order-id">${esc(o.id)}</div>
+          <div class="order-date">${fmtDate(o.date)}</div>
+        </div>
+        <span class="order-status ${o.status==='Selesai'?'selesai':''}">${esc(o.status)}</span>
+      </div>
+      <div class="order-body">
+        <strong>Produk:</strong> ${(o.items||[]).map(i=>esc(i.name)+' ('+i.qty+' '+(i.unit||'')+')').join(', ')}<br>
+        <strong>Total:</strong> ${rupiah(o.total)}<br>
+        <strong>Pembayaran:</strong> ${esc(o.payment||'-')}
+      </div>
+      <button class="btn btn-wa" style="font-size:13px;padding:9px" onclick="waOrder('${esc(o.id)}','${esc(o.buyer||'')}')">💬 Hubungi Admin via WhatsApp</button>
+    </div>`).join('');
+}
+
+/* ---------- PROFILE ---------- */
+function renderProfile(){
+  const el = document.getElementById('profileBody');
+  if(!el) return;
+  if(!USER){
+    el.innerHTML = `
+      <div class="profile-card">
+        <div class="avatar">👤</div>
+        <div class="profile-name">Belum Login</div>
+        <div class="profile-info">Silakan login atau daftar untuk memesan.</div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary" style="flex:1" onclick="showLogin()">Login</button>
+        <button class="btn btn-outline" style="flex:1" onclick="showRegister()">Daftar</button>
+      </div>
+      <div class="summary" style="margin-top:14px">
+        <h3>📦 Riwayat Pesanan Lokal</h3>
+        ${ORDERS.length===0 ? '<p style="font-size:12px;color:var(--muted)">Belum ada pesanan.</p>' : ORDERS.map(o=>`<div class="srow"><span class="lbl">${esc(o.id)}</span><span class="val">${esc(o.status)}</span></div>`).join('')}
+      </div>`;
+    return;
+  }
+  const active = ORDERS.filter(o=>o.status!=='Selesai');
+  const done   = ORDERS.filter(o=>o.status==='Selesai');
+  el.innerHTML = `
+    <div class="profile-card">
+      <div class="avatar">${esc((USER.name||'U').charAt(0).toUpperCase())}</div>
+      <div class="profile-name">${esc(USER.name||'-')}</div>
+      <div class="profile-info">${esc(USER.email||'-')}</div>
+      <div class="profile-info">${esc(USER.wa||'-')}</div>
+      ${USER.isAdmin ? '<div style="margin-top:8px"><span class="admin-toggle active">🔧 Admin</span></div>' : ''}
+    </div>
+    <div class="summary">
+      <h3>📦 Pesanan Aktif</h3>
+      ${active.length===0 ? '<p style="font-size:12px;color:var(--muted)">Tidak ada pesanan aktif.</p>' : active.map(o=>`<div class="srow"><span class="lbl">${esc(o.id)}</span><span class="val">${esc(o.status)}</span></div>`).join('')}
+    </div>
+    <div class="summary">
+      <h3>✅ Pesanan Selesai</h3>
+      ${done.length===0 ? '<p style="font-size:12px;color:var(--muted)">Belum ada pesanan selesai.</p>' : done.map(o=>`<div class="srow"><span class="lbl">${esc(o.id)}</span><span class="val">Selesai</span></div>`).join('')}
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">
+      <button class="btn btn-outline btn-block" onclick="waGeneral()">💬 Chat WhatsApp Admin</button>
+      <a href="${IG_URL}" target="_blank" class="btn btn-outline btn-block" style="text-align:center">📷 Instagram PinkyEdu</a>
+      <a href="${TT_URL}" target="_blank" class="btn btn-outline btn-block" style="text-align:center">🎵 TikTok PinkyEdu</a>
+      <button class="btn btn-danger btn-block" onclick="logoutUser()">Logout</button>
+    </div>`;
+}
+
+function showLogin(){
+  openModal(`
+    <h3>Login</h3>
+    <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="lgEmail" type="email" placeholder="email@example.com"></div>
+    <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="lgPass" type="password" placeholder="••••••••"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+      <button class="btn btn-primary" onclick="doLogin()">Login</button>
+    </div>`);
+}
+function doLogin(){
+  const email = (document.getElementById('lgEmail').value||'').trim();
+  const pass  = (document.getElementById('lgPass').value||'').trim();
+  if(!email || !pass) return toast('Isi email dan password');
+  USER = { name: email.split('@')[0], email, wa:'', isAdmin:false };
+  saveUser(); closeModal(); renderProfile(); updateAdminUI();
+  toast('💗 Login berhasil');
+}
+function showRegister(){
+  openModal(`
+    <h3>Daftar</h3>
+    <div class="form-group"><label class="form-label">Nama</label><input class="form-input" id="rgName" placeholder="Nama lengkap"></div>
+    <div class="form-group"><label class="form-label">Email</label><input class="form-input" id="rgEmail" type="email" placeholder="email@example.com"></div>
+    <div class="form-group"><label class="form-label">Nomor WhatsApp</label><input class="form-input" id="rgWa" placeholder="08xxxxxxxxxx"></div>
+    <div class="form-group"><label class="form-label">Password</label><input class="form-input" id="rgPass" type="password" placeholder="••••••••"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+      <button class="btn btn-primary" onclick="doRegister()">Daftar</button>
+    </div>`);
+}
+function doRegister(){
+  const name = (document.getElementById('rgName').value||'').trim();
+  const email= (document.getElementById('rgEmail').value||'').trim();
+  const wa   = (document.getElementById('rgWa').value||'').trim();
+  const pass = (document.getElementById('rgPass').value||'').trim();
+  if(!name||!email||!wa||!pass) return toast('Lengkapi semua data');
+  USER = { name, email, wa, isAdmin:false };
+  saveUser(); closeModal(); renderProfile(); updateAdminUI();
+  toast('🎀 Pendaftaran berhasil!');
+}
+function logoutUser(){
+  confirmBox('Yakin ingin logout?', ()=>{
+    USER = null; saveUser(); renderProfile(); updateAdminUI();
+    toast('Logout berhasil');
+  });
+}
+
+/* ---------- ADMIN ---------- */
+function toggleAdmin(){
+  if(!USER){
+    const pass = prompt('Masukkan password Admin:');
+    if(pass === null) return;
+    if(pass === ADMIN_PASS){
+      USER = { name:'Admin PinkyEdu', email:'admin@pinkyedu.id', wa:WA_DISPLAY, isAdmin:true };
+      saveUser(); IS_ADMIN = true; updateAdminUI();
+      toast('🔧 Mode Admin aktif'); go('shop');
+    } else toast('Password salah');
+    return;
+  }
+  if(!USER.isAdmin) return toast('Kamu bukan Admin');
+  IS_ADMIN = !IS_ADMIN;
+  USER.isAdmin = IS_ADMIN; saveUser();
+  updateAdminUI();
+  toast(IS_ADMIN ? '🔧 Mode Admin aktif' : 'Mode Buyer aktif');
+}
+
+function updateAdminUI(){
+  const isAdmin = !!(USER && USER.isAdmin);
+  const t = document.getElementById('adminToggle');
+  if(t){
+    t.classList.toggle('active', isAdmin);
+    t.textContent = isAdmin ? '🔧 Admin' : '🔧';
+  }
+  const ts = document.getElementById('adminToggleShop');
+  if(ts) ts.style.display = isAdmin ? 'inline-flex' : 'none';
+  const panel = document.getElementById('adminPanel');
+  if(panel){
+    panel.style.display = isAdmin ? 'block' : 'none';
+    if(isAdmin) renderAdminPanel();
+  }
+}
+
+function renderAdminPanel(){
+  const el = document.getElementById('adminPanel');
+  if(!el) return;
+  el.innerHTML = `
+    <div class="admin-panel">
+      <h3>🔧 Panel Admin — Kelola Produk & Stok</h3>
+      <button class="btn btn-primary btn-block" style="margin-bottom:10px" onclick="showAddProduct()">+ Tambah Produk</button>
+      ${PRODUCTS.map(p=>`
+        <div class="admin-prod">
+          <img src="${p.img||IMG_DEFAULT}" alt="">
+          <div class="ap-info">
+            <div class="ap-name">${esc(p.name)}</div>
+            <div class="ap-meta">${rupiah(p.price)} / ${esc(p.unitLabel||p.unit||'')}</div>
+            <div class="ap-meta">Stok: ${Number(p.stock)||0}</div>
+          </div>
+          <div class="admin-btns">
+            <button class="ab-edit" onclick="editProduct('${p.id}')">Edit</button>
+            <button class="ab-add" onclick="addStock('${p.id}')">+Stok</button>
+            <button class="ab-red" onclick="redStock('${p.id}')">−Stok</button>
+            <button class="ab-del" onclick="delProduct('${p.id}')">Hapus</button>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+function showAddProduct(){
+  openModal(`
+    <h3>Tambah Produk</h3>
+    <div class="form-group"><label class="form-label">Nama</label><input class="form-input" id="apName"></div>
+    <div class="form-group"><label class="form-label">Harga</label><input class="form-input" id="apPrice" type="number" value="0"></div>
+    <div class="form-group"><label class="form-label">Satuan</label><input class="form-input" id="apUnit" placeholder="contoh: lembar, alat"></div>
+    <div class="form-group"><label class="form-label">Kelipatan (step)</label><input class="form-input" id="apStep" type="number" value="1"></div>
+    <div class="form-group"><label class="form-label">Label Satuan</label><input class="form-input" id="apUnitLabel" placeholder="contoh: 10 lembar"></div>
+    <div class="form-group"><label class="form-label">Deskripsi</label><textarea class="form-textarea" id="apDesc"></textarea></div>
+    <div class="form-group"><label class="form-label">Stok</label><input class="form-input" id="apStock" type="number" value="10"></div>
+    <div class="form-group"><label class="form-label">URL Gambar (opsional)</label><input class="form-input" id="apImg" placeholder="https://..."></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+      <button class="btn btn-primary" onclick="saveNewProduct()">Simpan</button>
+    </div>`);
+}
+
+function saveNewProduct(){
+  const name = (document.getElementById('apName').value||'').trim();
+  const price= parseInt(document.getElementById('apPrice').value)||0;
+  const unit = (document.getElementById('apUnit').value||'').trim() || 'pcs';
+  const step = parseInt(document.getElementById('apStep').value)||1;
+  const unitLabel = (document.getElementById('apUnitLabel').value||'').trim() || (step>1 ? step+' '+unit : unit);
+  const desc = (document.getElementById('apDesc').value||'').trim();
+  const stock= parseInt(document.getElementById('apStock').value)||0;
+  let img = (document.getElementById('apImg').value||'').trim();
+  if(!name) return toast('Nama wajib diisi');
+  if(!img) img = IMG_DEFAULT;
+  PRODUCTS.push({
+    id:'custom-'+Date.now(),
+    name, price, unit, step, unitLabel, desc, img, stock,
+    needsFile:false
+  });
+  saveProducts(); closeModal();
+  renderShop(); renderHome(); renderAdminPanel();
+  toast('✅ Produk ditambahkan');
+}
+
+function editProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  openModal(`
+    <h3>Edit Produk</h3>
+    <div class="form-group"><label class="form-label">Nama</label><input class="form-input" id="epName" value="${esc(p.name)}"></div>
+    <div class="form-group"><label class="form-label">Harga</label><input class="form-input" id="epPrice" type="number" value="${Number(p.price)||0}"></div>
+    <div class="form-group"><label class="form-label">Satuan</label><input class="form-input" id="epUnit" value="${esc(p.unit||'')}"></div>
+    <div class="form-group"><label class="form-label">Kelipatan (step)</label><input class="form-input" id="epStep" type="number" value="${Number(p.step)||1}"></div>
+    <div class="form-group"><label class="form-label">Label Satuan</label><input class="form-input" id="epUnitLabel" value="${esc(p.unitLabel||'')}"></div>
+    <div class="form-group"><label class="form-label">Deskripsi</label><textarea class="form-textarea" id="epDesc">${esc(p.desc||'')}</textarea></div>
+    <div class="form-group"><label class="form-label">Stok</label><input class="form-input" id="epStock" type="number" value="${Number(p.stock)||0}"></div>
+    <div class="form-group"><label class="form-label">URL Gambar</label><input class="form-input" id="epImg" placeholder="Biarkan kosong untuk tidak mengubah"></div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal()">Batal</button>
+      <button class="btn btn-primary" onclick="saveEditProduct('${id}')">Simpan</button>
+    </div>`);
+}
+
+function saveEditProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  p.name = (document.getElementById('epName').value||'').trim() || p.name;
+  p.price= parseInt(document.getElementById('epPrice').value)||0;
+  p.unit = (document.getElementById('epUnit').value||'').trim() || p.unit;
+  p.step = parseInt(document.getElementById('epStep').value)||1;
+  p.unitLabel = (document.getElementById('epUnitLabel').value||'').trim() || (p.step>1?p.step+' '+p.unit:p.unit);
+  p.desc = (document.getElementById('epDesc').value||'').trim();
+  p.stock= parseInt(document.getElementById('epStock').value)||0;
+  const img = (document.getElementById('epImg').value||'').trim();
+  if(img) p.img = img;
+  saveProducts(); closeModal();
+  renderShop(); renderHome(); renderAdminPanel();
+  toast('✅ Produk diperbarui');
+}
+
+function delProduct(id){
+  confirmBox('Hapus produk ini?', ()=>{
+    PRODUCTS = PRODUCTS.filter(x=>x.id!==id);
+    saveProducts(); renderShop(); renderHome(); renderAdminPanel();
+    toast('Produk dihapus');
+  });
+}
+
+function addStock(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  const n = prompt('Tambah stok sebanyak:', '10');
+  if(n === null) return;
+  const num = parseInt(n);
+  if(!num || num<=0) return toast('Jumlah tidak valid');
+  p.stock = (Number(p.stock)||0) + num;
+  saveProducts(); renderShop(); renderAdminPanel();
+  toast('Stok +' + num);
+}
+
+function redStock(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  const n = prompt('Kurangi stok sebanyak:', '5');
+  if(n === null) return;
+  const num = parseInt(n);
+  if(!num || num<=0) return toast('Jumlah tidak valid');
+  p.stock = Math.max(0, (Number(p.stock)||0) - num);
+  saveProducts(); renderShop(); renderAdminPanel();
+  toast('Stok -' + num);
+}
+
+/* ---------- MODAL / TOAST / UTIL ---------- */
+function openModal(html){
+  const o = document.getElementById('overlay');
+  const b = document.getElementById('modalBody');
+  b.innerHTML = html;
+  o.classList.add('show');
+}
+function closeModal(){ document.getElementById('overlay').classList.remove('show'); }
+
+function confirmBox(msg, onYes, yesLabel='Ya, Lanjutkan', noLabel='Tidak, Kembali'){
+  openModal(`
+    <h3>Konfirmasi</h3>
+    <p>${esc(msg)}</p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeModal()">${esc(noLabel)}</button>
+      <button class="btn btn-danger" id="confirmYesBtn">${esc(yesLabel)}</button>
+    </div>`);
+  document.getElementById('confirmYesBtn').onclick = ()=>{ closeModal(); onYes(); };
+}
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._tt);
+  window._tt = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+function copyTxt(text, btn){
+  navigator.clipboard.writeText(text).then(()=>{
+    if(btn){
+      const old = btn.textContent;
+      btn.textContent = '✓ Tersalin';
+      btn.classList.add('copied');
+      setTimeout(()=>{ btn.textContent = old; btn.classList.remove('copied'); }, 1400);
+    }
+    toast('📋 Disalin ke clipboard');
+  }).catch(()=>toast('Gagal menyalin'));
+}
+
+document.getElementById('overlay').addEventListener('click', e=>{
+  if(e.target.id === 'overlay') closeModal();
+});
+
+/* ---------- START ---------- */
+loadAll();
+renderHome();
+renderShop();
+renderCart();
+renderOrders();
+renderProfile();
+updateBadge();
+updateAdminUI();
+</script>
+</body>
+</html>
